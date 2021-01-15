@@ -1,0 +1,20 @@
+{
+  "variables":{
+    "linode_token": "{{ env `TF_VAR_token`}}"
+  },
+  "builders":[{
+    "type": "linode",
+    "linode_token":"{{ user `linode_token` }}",
+    "image": "linode/debian10",
+    "region":"ca-central",
+    "instance_type":"g6-nanode-1",
+    "instance_label":"elastic-{{ timestamp }}",
+    "image_label":"elastic-base",
+    "image_description":"Creating an Elastic Stack template to practice with.",
+    "ssh_username":"root"
+  }],
+  "provisioners": [{
+    "type":"ansible",
+    "playbook_file":"playbook.yml"
+  }]
+}
